@@ -1,6 +1,7 @@
 package config
 
 import (
+	"bytes"
 	"embed"
 	"fmt"
 	"github.com/fsnotify/fsnotify"
@@ -27,11 +28,11 @@ func ConfigInit(f embed.FS) *viper.Viper {
 		filepath := de.Name()
 		v.SetConfigFile(filepath)
 		v.SetConfigType("yaml")
+		if err = v.ReadInConfig(); err != nil {
+			panic(fmt.Errorf("无法读取配置文件：%s\n", err))
+		}
 	}
 
-	if err = v.ReadInConfig(); err != nil {
-		panic(fmt.Errorf("无法读取配置文件：%s\n", err))
-	}
 	// 监控配置文件
 	v.WatchConfig()
 	// 配置文件变化事件监听
@@ -47,4 +48,25 @@ func ConfigInit(f embed.FS) *viper.Viper {
 	}
 
 	return v
+}
+
+var AppConf *viper.Viper
+
+func ConfigInit2(f embed.FS) {
+	AppConf = viper.New()
+	//添加根路径
+	dir := "config"
+	// 获取目录的文件名
+	dirEntries, err := f.ReadDir(dir)
+	if err != nil {
+		fmt.Println("错误", err.Error())
+	}
+	for _, de := range dirEntries {
+		if !de.IsDir() {
+			file, _ := f.ReadFile(dir + "/" + de.Name())
+			// 如果你的配置文件没有写扩展名，那么这里需要声明你的配置文件属于什么格式
+			AppConf.SetConfigType("yaml")
+			_ = AppConf.MergeConfig(bytes.NewBuffer(file))
+		}
+	}
 }

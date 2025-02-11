@@ -9,5 +9,7 @@ import (
 var f embed.FS
 
 func main() {
-	config.ConfigInit(f)
+	//config.ConfigInit(f)
+	config.ConfigInit2(f)
+	println(config.AppConf.GetString("viewer.Title"))
 }
