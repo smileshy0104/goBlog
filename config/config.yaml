@@ -18,3 +18,6 @@ system:
   ValineAppid : "TWojjl4R6DV3eEaiAfb16PTv-gzGzoHsz"
   ValineAppkey : "AB1nyR9IBUntAMr7FLlc3BdN"
   ValineServerURL : "https://twojjl4r.lc-cn-n1-shared.com"
+
+#服务监听地址
+address: "0.0.0.0:8012"
