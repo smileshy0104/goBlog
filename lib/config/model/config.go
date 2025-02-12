@@ -5,4 +5,5 @@ type ConfigModel struct {
 	JWT    JWT          `json:"jwt" yaml:"jwt"`
 	Viewer Viewer       `json:"viewer" yaml:"viewer"`
 	System SystemConfig `json:"system" yaml:"system"`
+	Mysql  Mysql        `json:"mysql" yaml:"mysql"`
 }

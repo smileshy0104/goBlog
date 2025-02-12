@@ -3,9 +3,12 @@ package global
 import (
 	"github.com/spf13/viper"
 	"goBlog/lib/config/model"
+	"gorm.io/gorm"
 )
 
 var (
-	GVA_CONFIG model.ConfigModel
-	GVA_VP     *viper.Viper
+	GVA_DB            *gorm.DB
+	GVA_CONFIG        model.ConfigModel
+	GVA_VP            *viper.Viper
+	GVA_ACTIVE_DBNAME *string
 )
