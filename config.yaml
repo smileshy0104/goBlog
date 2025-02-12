@@ -25,7 +25,7 @@ system:
 mysql:
   path: "localhost"
   port: "3306"
-  config: ""
+  config: "charset=utf8&loc=%s&parseTime=true"
   db-name: "goblog"
   username: "root"
   password: "root"

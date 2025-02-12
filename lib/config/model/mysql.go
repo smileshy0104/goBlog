@@ -1,5 +1,10 @@
 package model
 
+import (
+	"fmt"
+	"net/url"
+)
+
 type Mysql struct {
 	Prefix       string `mapstructure:"prefix" json:"prefix" yaml:"prefix"`                         // 数据库前缀
 	Port         string `mapstructure:"port" json:"port" yaml:"port"`                               // 数据库端口
@@ -17,5 +22,6 @@ type Mysql struct {
 }
 
 func (m *Mysql) Dsn() string {
-	return m.Username + ":" + m.Password + "@tcp(" + m.Path + ":" + m.Port + ")/" + m.Dbname + "?" + m.Config
+	//return m.Username + ":" + m.Password + "@tcp(" + m.Path + ":" + m.Port + ")/" + m.Dbname + "?" + m.Config
+	return m.Username + ":" + m.Password + "@tcp(" + m.Path + ":" + m.Port + ")/" + m.Dbname + "?" + fmt.Sprintf(m.Config, url.QueryEscape("Asia/Shanghai"))
 }
