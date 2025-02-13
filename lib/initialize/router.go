@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"goBlog/app/middleware"
 	"goBlog/lib/response"
+	"goBlog/routes"
 )
 
 // InitRouter 初始化路由
@@ -32,7 +33,7 @@ func InitRouter() *gin.Engine {
 	// r.Use(middleware.LoggerToMysql())
 
 	//InitSysRouter 引入系统基础功能路由
-	// InitSysRouter(r)
+	routes.InitSysRouter(r)
 
 	return r
 }
