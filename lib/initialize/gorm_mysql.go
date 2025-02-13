@@ -7,6 +7,8 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"log"
+	"time"
 )
 
 // GormMysql 初始化Mysql数据库
@@ -31,6 +33,16 @@ func GormMysql() *gorm.DB {
 		sqlDB, _ := db.DB()
 		sqlDB.SetMaxIdleConns(m.MaxIdleConns)
 		sqlDB.SetMaxOpenConns(m.MaxOpenConns)
+		// 连接最大存活时间
+		sqlDB.SetConnMaxLifetime(time.Minute * 3)
+		//空闲连接最大存活时间
+		sqlDB.SetConnMaxIdleTime(time.Minute * 1)
+		err = sqlDB.Ping()
+		if err != nil {
+			log.Println("数据库无法连接")
+			_ = sqlDB.Close()
+			panic(err)
+		}
 		return db
 	}
 }
@@ -54,6 +66,16 @@ func GormMysqlByConfig(m model.Mysql) *gorm.DB {
 		sqlDB, _ := db.DB()
 		sqlDB.SetMaxIdleConns(m.MaxIdleConns)
 		sqlDB.SetMaxOpenConns(m.MaxOpenConns)
+		// 连接最大存活时间
+		sqlDB.SetConnMaxLifetime(time.Minute * 3)
+		//空闲连接最大存活时间
+		sqlDB.SetConnMaxIdleTime(time.Minute * 1)
+		err = sqlDB.Ping()
+		if err != nil {
+			log.Println("数据库无法连接")
+			_ = sqlDB.Close()
+			panic(err)
+		}
 		return db
 	}
 }
