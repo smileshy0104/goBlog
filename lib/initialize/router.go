@@ -3,7 +3,7 @@ package initialize
 import (
 	"github.com/gin-gonic/gin"
 	"goBlog/app/middleware"
-	"log"
+	"goBlog/lib/response"
 )
 
 // InitRouter 初始化路由
@@ -13,8 +13,7 @@ func InitRouter() *gin.Engine {
 
 	//路由404处理
 	r.NoRoute(func(c *gin.Context) {
-		log.Fatal("接口不存在")
-		//response.Output(c, 404, "接口不存在", nil)
+		response.Output(c, 404, "接口不存在", nil)
 	})
 
 	//全局中间件 -跨域、

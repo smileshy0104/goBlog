@@ -6,4 +6,5 @@ type ConfigModel struct {
 	Viewer Viewer       `json:"viewer" yaml:"viewer"`
 	System SystemConfig `json:"system" yaml:"system"`
 	Mysql  Mysql        `json:"mysql" yaml:"mysql"`
+	Redis  Redis        `json:"redis" yaml:"redis"`
 }

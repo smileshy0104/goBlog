@@ -32,6 +32,8 @@ func main() {
 	// 3. 数据库连接
 	global.GVA_DB = initialize.Gorm() // 使用 GORM 建立数据库连接
 	// 典型实现：根据配置创建 *gorm.DB 实例
+	// Redis 初始化
+	// global.GVA_REDIS = initialize.Redis()
 
 	// 4. 路由初始化
 	r := initialize.InitRouter()
