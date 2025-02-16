@@ -19,6 +19,9 @@ import (
 var f embed.FS
 
 func main() {
+	// 0. 日志管理初始化
+	global.GVA_Logger = log.New(os.Stdout, "", log.Ldate|log.Ltime)
+
 	// 1. 配置管理初始化
 	global.GVA_VP = config.ConfigInit() // 加载配置文件（如 config.yaml）
 	// 作用：通过 Viper 库读取配置文件，存储到全局变量 GVA_VP
@@ -50,6 +53,7 @@ func main() {
 	go func() {
 		// service connections
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			//global.GVA_Logger.Println("web 服务器启动失败： ", err)
 			fmt.Printf("web服务器 启动失败 : %v\n", err)
 		}
 	}()
