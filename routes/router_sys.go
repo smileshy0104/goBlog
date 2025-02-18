@@ -15,5 +15,12 @@ func InitSysRouter(r *gin.Engine) {
 				"msg": names,
 			})
 		})
+		sysGp.GET("/test", func(c *gin.Context) {
+			names := []string{}
+			global.GVA_DB.Table("blog_user").Select("user_name").Scan(&names)
+			c.JSON(200, gin.H{
+				"msg": names,
+			})
+		})
 	}
 }
